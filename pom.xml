@@ -1,0 +1,12 @@
+<project>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.example.pg13</groupId>
+	<artifactId>pg13-parent</artifactId>
+	<version>1.0</version>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>pg13-maven-plugin</module>
+		<module>pg13-sample</module>
+	</modules>
+</project>

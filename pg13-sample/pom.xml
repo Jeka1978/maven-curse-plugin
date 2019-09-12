@@ -1,0 +1,68 @@
+<project>
+    <parent>
+        <groupId>com.example.pg13</groupId>
+        <artifactId>pg13-parent</artifactId>
+        <version>1.0</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>pg13-sample</artifactId>
+
+    <properties>
+        <!--
+          prevents annoying build warnings by Maven
+          if left unspecified, the plugin will choose default encoding
+        -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.build.resourceEncoding>UTF-8</project.build.resourceEncoding>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.example.pg13</groupId>
+                <artifactId>pg13-maven-plugin</artifactId>
+                <version>1.0</version>
+                <configuration>
+                    <words>
+                        <word>rubberduck</word>
+                    </words>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>rate-sources</id>
+                        <!--
+                          Will default to 'process-sources' phase.
+                          You may also specify an alternative phase explicitly:
+
+                            <phase>prepare-package</phase>
+
+                                                  This will invoke 'rate' right before packaging.
+                        -->
+                        <goals>
+                            <goal>rate</goal>
+                        </goals>
+                    </execution>
+                    <!--
+                      Here we inherit the common configuration above ('${words}'),
+                      but then specify that we want to validate our property files
+                      instead.
+                    -->
+                    <execution>
+                        <id>rate-resources</id>
+                        <configuration>
+                            <include>*.properties</include>
+                            <directory>${basedir}/src/main/resources</directory>
+                        </configuration>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>rate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
+
